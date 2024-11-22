@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Edição de Usuário";
+}
+
+@model SoftManager.Models.User
+
+<h2 class="text-3xl font-semibold mb-4">Editar Usuário</h2>
+
+<form asp-action="Edit" enctype="multipart/form-data" method="post" class="bg-white p-6 rounded-lg shadow-md">
+
+    <input type="hidden" asp-for="Id" />
+
+    <!-- Nome Completo -->
+    <div class="mb-4">
+        <label for="FullName" class="block text-sm font-medium text-gray-700">Nome Completo</label>
+        <input type="text" asp-for="FullName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Data de Nascimento -->
+    <div class="mb-4">
+        <label for="BirthDate" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+        <input type="date" asp-for="BirthDate" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="BirthDate" class="text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Telefone Fixo -->
+    <div class="mb-4">
+        <label for="PhoneNumber" class="block text-sm font-medium text-gray-700">Telefone Fixo</label>
+        <input type="tel" asp-for="PhoneNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="PhoneNumber" class="text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Celular -->
+    <div class="mb-4">
+        <label for="MobileNumber" class="block text-sm font-medium text-gray-700">Número de Celular</label>
+        <input type="tel" asp-for="MobileNumber" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="MobileNumber" class="text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Endereço -->
+    <div class="mb-4">
+        <label for="Address" class="block text-sm font-medium text-gray-700">Endereço</label>
+        <input type="text" asp-for="Address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="Address" class="text-red-500 text-sm"></span>
+    </div>
+
+    <!-- Foto de Perfil -->
+    <div class="mb-4">
+        <label for="ProfilePicture" class="block text-sm font-medium text-gray-700">Foto de Perfil</label>
+        <input type="file" asp-for="ProfilePicture" accept="image/*" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
+        <span asp-validation-for="ProfilePicture" class="text-red-500 text-sm"></span>
+
+        <!-- Exibir Foto Atual, se existir -->
+        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+        {
+            <div class="mt-4">
+                <strong class="block">Foto de Perfil Atual:</strong>
+                <img src="@Model.ProfilePicture" alt="Foto de Perfil Atual" class="w-32 h-32 rounded-full object-cover mt-2" />
+            </div>
+        }
+    </div>
+
+    <!-- Gestor? -->
+    <div class="mb-4">
+        <label for="IsManager" class="block text-sm font-medium text-gray-700">É Gestor?</label>
+        <input type="checkbox" asp-for="IsManager" class="mt-1" />
+        <span asp-validation-for="IsManager" class="text-red-500 text-sm"></span>
+    </div>
+
+    <div class="flex justify-end space-x-4">
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Salvar Alterações</button>
+        <a href="@Url.Action("Index", "User")" class="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none">Cancelar</a>
+    </div>
+</form>
+
+<div class="mt-4">
+    <a href="@Url.Action("Details", "User", new { id = Model.Id })" class="text-blue-600 hover:text-blue-800">Voltar para Detalhes</a>
+</div>

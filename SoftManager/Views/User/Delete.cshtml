@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Exclusão de Usuário";
+}
+
+@model SoftManager.Models.User
+
+<h2 class="text-3xl font-semibold mb-4">Excluir Usuário</h2>
+
+<p class="text-lg text-gray-700 mb-6">Tem certeza de que deseja excluir este usuário?</p>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <!-- Informações do Usuário -->
+    <div class="mb-4">
+        <strong class="text-lg">Nome Completo:</strong> @Model.FullName
+    </div>
+    <div class="mb-4">
+        <strong class="text-lg">Email:</strong> @Model.Email
+    </div>
+    <div class="mb-4">
+        <strong class="text-lg">Telefone Fixo:</strong> @Model.PhoneNumber
+    </div>
+
+    <div class="mb-4">
+        <strong class="text-lg">Número de Celular:</strong> @Model.MobileNumber
+    </div>
+
+    <div class="mb-4">
+        <strong class="text-lg">Endereço:</strong> @Model.Address
+    </div>
+
+    <div class="mb-4">
+        <strong class="text-lg">Foto de Perfil:</strong>
+        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+        {
+            <img src="@Model.ProfilePicture" alt="Foto de Perfil" class="w-32 h-32 rounded-full object-cover mt-2" />
+        }
+        else
+        {
+            <span>Sem foto de perfil</span>
+        }
+    </div>
+
+    <form method="post">
+        @Html.AntiForgeryToken()
+
+        <!-- Botões de Confirmação e Cancelamento -->
+        <div class="flex justify-between space-x-4">
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                Confirmar Exclusão
+            </button>
+            <a href="@Url.Action("Index", "User")" class="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400 focus:outline-none">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>

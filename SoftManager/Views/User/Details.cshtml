@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Detalhes do Usuário";
+}
+
+@model SoftManager.Models.User
+
+<h2 class="text-3xl font-semibold mb-4">Detalhes do Usuário</h2>
+
+<div class="bg-white p-6 rounded-lg shadow-md">
+
+    <!-- Foto de Perfil -->
+    <div class="mb-6 text-center">
+        @if (!string.IsNullOrEmpty(Model.ProfilePicture))
+        {
+            <picture>
+                <source media="(min-width: 650px)" srcset="@Model.ProfilePicture" />
+                <source media="(min-width: 465px)" srcset="@Model.ProfilePicture" />
+                <img src="@Model.ProfilePicture" alt="Foto de Perfil" class="w-32 h-32 rounded-full object-cover mx-auto" />
+            </picture>
+        }
+        else
+        {
+            <img src="https://via.placeholder.com/150" alt="Sem Foto de Perfil" class="w-32 h-32 rounded-full object-cover mx-auto" />
+        }
+    </div>
+
+    <!-- Nome Completo -->
+    <div class="mb-4">
+        <strong class="text-gray-700">Nome Completo:</strong>
+        <p class="text-lg">@Model.FullName</p>
+    </div>
+
+    <!-- Data de Nascimento -->
+    <div class="mb-4">
+        <strong class="text-gray-700">Data de Nascimento:</strong>
+        <p class="text-lg">@Model.BirthDate.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <!-- Telefone Fixo -->
+    <div class="mb-4">
+        <strong class="text-gray-700">Telefone Fixo:</strong>
+        <p class="text-lg">@Model.PhoneNumber</p>
+    </div>
+
+    <!-- Celular -->
+    <div class="mb-4">
+        <strong class="text-gray-700">Número de Celular:</strong>
+        <p class="text-lg">@Model.MobileNumber</p>
+    </div>
+
+    <!-- Endereço -->
+    <div class="mb-4">
+        <strong class="text-gray-700">Endereço:</strong>
+        <p class="text-lg">@Model.Address</p>
+    </div>
+
+    <!-- Status de Gestor -->
+    <div class="mb-4">
+        <strong class="text-gray-700">É Gestor?</strong>
+        <p class="text-lg">@Model.IsManager ? "Sim" : "Não"</p>
+    </div>
+
+</div>
+
+<div class="mt-6 text-center">
+    <a href="@Url.Action("Edit", "User", new { id = Model.Id })" class="text-blue-600 hover:text-blue-800">Editar</a> |
+    <a href="@Url.Action("Index", "User")" class="text-blue-600 hover:text-blue-800">Voltar para a Lista</a>
+</div>
